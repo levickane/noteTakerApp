@@ -50,12 +50,26 @@ app.post('/api/notes', (req, res) => {
   });
 });
 
-app.delete('/api/note/:id', (req, res) => {
-  const deletedNote = req.body;
+app.delete('/api/notes/:id', (req, res) => {
+  const deletedNote = req.params.id;
+  console.log(deletedNote);
   fs.readFile('./db/db.json', 'utf8', function (err, data) {
     if (err) throw err;
     var arrayOfNoteObjects = JSON.parse(data);
     console.log(arrayOfNoteObjects);
+    arrayOfNoteObjects.forEach((note) => {
+      if (note.id == deletedNote) {
+        note.remove();
+      }
+      fs.writeFile(
+        './db/db.json',
+        JSON.stringify(arrayOfNoteObjects),
+        'utf-8',
+        function (err) {
+          if (err) throw err;
+        }
+      );
+    });
   });
 });
 
