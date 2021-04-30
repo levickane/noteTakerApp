@@ -3,7 +3,7 @@
 const express = require('express');
 const path = require('path');
 const fs = require('fs');
-
+const uuid = require('uuid');
 // Sets up the Express App
 
 const app = express();
@@ -34,10 +34,10 @@ app.get('/api/notes', (req, res) => {
 
 app.post('/api/notes', (req, res) => {
   const newNote = req.body;
+  newNote.id = uuid.v4();
   fs.readFile('./db/db.json', 'utf8', function (err, data) {
     if (err) throw err;
     var arrayOfNoteObjects = JSON.parse(data);
-    console.log(arrayOfNoteObjects);
     arrayOfNoteObjects.push(newNote);
     fs.writeFile(
       './db/db.json',
@@ -45,9 +45,17 @@ app.post('/api/notes', (req, res) => {
       'utf-8',
       function (err) {
         if (err) throw err;
-        console.log('DONE!');
       }
     );
+  });
+});
+
+app.delete('/api/note/:id', (req, res) => {
+  const deletedNote = req.body;
+  fs.readFile('./db/db.json', 'utf8', function (err, data) {
+    if (err) throw err;
+    var arrayOfNoteObjects = JSON.parse(data);
+    console.log(arrayOfNoteObjects);
   });
 });
 

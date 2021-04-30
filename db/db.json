@@ -1,9 +1,1 @@
-[
-  { "title": "Test Title", "text": "Test text" },
-  { "title": "hello", "text": "Goodbye" },
-  { "title": "yo mama", "text": "is fat" },
-  { "title": "asdf", "text": "asdf" },
-  { "title": "hello", "text": "asdf" },
-  { "title": "again!", "text": "a;slkdf" },
-  { "title": "this note", "text": "has an id of 4", "id": 4 }
-]
+[{"title":"Test Title","text":"Test text"},{"title":"hello","text":"Goodbye"},{"title":"yo mama","text":"is fat"},{"title":"asdf","text":"asdf"},{"title":"hello","text":"asdf"},{"title":"again!","text":"a;slkdf"},{"title":"this note","text":"has an id of 4","id":4},{"title":"asdjkfhas","text":";ajsdfn;kajsndf"},{"title":"refresh is good","text":"so am i","id":"c9c82797-1dc0-4547-acfd-be3059e759b2"}]
