@@ -45,6 +45,7 @@ app.post('/api/notes', (req, res) => {
       'utf-8',
       function (err) {
         if (err) throw err;
+        res.json(arrayOfNoteObjects);
       }
     );
   });
@@ -56,20 +57,21 @@ app.delete('/api/notes/:id', (req, res) => {
   fs.readFile('./db/db.json', 'utf8', function (err, data) {
     if (err) throw err;
     var arrayOfNoteObjects = JSON.parse(data);
-    console.log(arrayOfNoteObjects);
-    arrayOfNoteObjects.forEach((note) => {
-      if (note.id == deletedNote) {
-        note.remove();
-      }
-      fs.writeFile(
-        './db/db.json',
-        JSON.stringify(arrayOfNoteObjects),
-        'utf-8',
-        function (err) {
-          if (err) throw err;
-        }
-      );
+    console.log('all notes before deltte', arrayOfNoteObjects);
+    newNoteArray = arrayOfNoteObjects.filter((note) => {
+      console.log('filtering happening');
+      return note.id !== deletedNote;
     });
+    console.log('NEW ARRAYT delted dude gone', newNoteArray);
+    fs.writeFile(
+      './db/db.json',
+      JSON.stringify(newNoteArray),
+      'utf-8',
+      function (err) {
+        if (err) throw err;
+        res.json(newNoteArray);
+      }
+    );
   });
 });
 
