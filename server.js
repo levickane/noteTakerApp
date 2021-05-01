@@ -57,12 +57,9 @@ app.delete('/api/notes/:id', (req, res) => {
   fs.readFile('./db/db.json', 'utf8', function (err, data) {
     if (err) throw err;
     var arrayOfNoteObjects = JSON.parse(data);
-    console.log('all notes before deltte', arrayOfNoteObjects);
     newNoteArray = arrayOfNoteObjects.filter((note) => {
-      console.log('filtering happening');
       return note.id !== deletedNote;
     });
-    console.log('NEW ARRAYT delted dude gone', newNoteArray);
     fs.writeFile(
       './db/db.json',
       JSON.stringify(newNoteArray),
